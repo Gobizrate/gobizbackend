@@ -183,6 +183,8 @@ func URL(w http.ResponseWriter, r *http.Request) {
 		// rating
 	case method == "GET" && path == "/rating":
 		controller.GetAllRating(w, r)
+	case method == "POST" && path == "add/rating":
+		controller.PostRating(w, r)
 	default:
 		controller.NotFoundRoute(w, r)
 	}
