@@ -114,7 +114,7 @@ func InsertDataMenu(respw http.ResponseWriter, req *http.Request) {
 		Name:          menuName,
 		Price:         price,
 		OriginalPrice: originalPrice,
-		Rating:        rating,
+		Rating:        model.Rating{Average: rating, Count: 1},
 		Sold:          sold,
 		Image:         menuImageURL,
 	}
