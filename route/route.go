@@ -187,6 +187,8 @@ func URL(w http.ResponseWriter, r *http.Request) {
 		controller.PostRating(w, r)
 	case method == "DELETE" && path == "/delete/rating":
 		controller.DeleteRatingByID(w, r)
+	case method == "PUT" && path == "/update/rating":
+		controller.UpdateRating(w, r)
 	default:
 		controller.NotFoundRoute(w, r)
 	}
