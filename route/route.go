@@ -195,6 +195,8 @@ func URL(w http.ResponseWriter, r *http.Request) {
 		controller.GetAllFAQ(w, r)
 	case method == "POST" && path == "add/faq":
 		controller.PostFAQ(w, r)
+	case method == "DELETE" && path == "/delete/faq":
+		controller.DeleteFAQByID(w, r)
 	default:
 		controller.NotFoundRoute(w, r)
 	}
