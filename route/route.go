@@ -197,6 +197,8 @@ func URL(w http.ResponseWriter, r *http.Request) {
 		controller.PostFAQ(w, r)
 	case method == "DELETE" && path == "/delete/faq":
 		controller.DeleteFAQByID(w, r)
+	case method == "PUT" && path == "/update/faq":
+		controller.UpdateFAQ(w, r)
 	default:
 		controller.NotFoundRoute(w, r)
 	}
