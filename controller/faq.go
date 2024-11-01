@@ -6,9 +6,8 @@ import (
 
 	"github.com/gocroot/config"
 	"github.com/gocroot/helper/at"
-	// "github.com/gocroot/helper/atdb"
 
-	// "github.com/gocroot/helper/atdb"
+	"github.com/gocroot/helper/atdb"
 	"github.com/gocroot/helper/watoken"
 	"github.com/gocroot/model"
 	// "go.mongodb.org/mongo-driver/bson"
@@ -56,6 +55,21 @@ func PostFAQ(respw http.ResponseWriter, req *http.Request) {
 		Email:     faq.Email,
 		Handphone: faq.Handphone,
 		Questions: faq.Questions,
+	}
+
+	dataFaq, err := atdb.InsertOneDoc(config.Mongoconn, "faq", dataInsert)
+	if err != nil {
+		var respn model.Response
+		respn.Status = "Error: Gagal Insert Database"
+		respn.Response = err.Error()
+		at.WriteJSON(respw, http.StatusNotModified, respn)
+		return
+	}
+	response := map[string]interface{}{
+		"status":  "success",
+		"message": "FAQ berhasil ditambahkan",
+		"name":    payload.Alias,
+		"data":    dataFaq,
 	}
 
 	at.WriteJSON(respw, http.StatusOK, response)
