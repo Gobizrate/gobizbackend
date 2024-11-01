@@ -4,11 +4,11 @@ import (
 	"github.com/gocroot/helper/atdb"
 )
 
-var MongoString string = "mongodb+srv://ayalarifki:hHyX4lN7TmBtXW38@cluster0.5p1ozyb.mongodb.net/"
+var MongoString string = "mongodb+srv://abnormal:11akusayangibu@gobizcroot.o8vp5.mongodb.net/"
 
 var mongoinfo = atdb.DBInfo{
 	DBString: MongoString,
-	DBName:   "gobizdev",
+	DBName:   "gobizdevlop",
 }
 
 var Mongoconn, ErrorMongoconn = atdb.MongoConnect(mongoinfo)
