@@ -193,6 +193,8 @@ func URL(w http.ResponseWriter, r *http.Request) {
 		// FAQ
 	case method == "GET" && path == "/faq":
 		controller.GetAllFAQ(w, r)
+	case method == "GET" && path == "/faq-id":
+		controller.GetFAQByID(w, r)
 	case method == "POST" && path == "add/faq":
 		controller.PostFAQ(w, r)
 	case method == "DELETE" && path == "/delete/faq":
