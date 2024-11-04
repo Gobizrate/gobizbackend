@@ -134,5 +134,11 @@ func GetFAQByID(respw http.ResponseWriter, req *http.Request) {
 		return
 	}
 	
+	response := map[string]interface{}{
+		"status":  "success",
+		"message": "FAQ ditemukan",
+		"data":    faq,
+	}
+
 	at.WriteJSON(respw, http.StatusOK, response)
 }
