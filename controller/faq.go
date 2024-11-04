@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"context"
 	"encoding/json"
 	"net/http"
 
@@ -10,8 +11,9 @@ import (
 	"github.com/gocroot/helper/atdb"
 	"github.com/gocroot/helper/watoken"
 	"github.com/gocroot/model"
-	// "go.mongodb.org/mongo-driver/bson"
-	// "go.mongodb.org/mongo-driver/bson/primitive"
+
+	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 func GetAllFAQ(respw http.ResponseWriter, req *http.Request) {
@@ -114,5 +116,23 @@ func GetFAQByID(respw http.ResponseWriter, req *http.Request) {
 		return
 	}
 
+	objectID, err := primitive.ObjectIDFromHex(faqID)
+	if err != nil {
+		var respn model.Response
+		respn.Status = "Error: ID FAQ tidak valid"
+		at.WriteJSON(respw, http.StatusBadRequest, respn)
+		return
+	}
+
+	var faq model.FAQ
+	filter := bson.M{"_id": objectID}
+	err = config.Mongoconn.Collection("faq").FindOne(context.TODO(), filter).Decode(&faq)
+	if err != nil {
+		var respn model.Response
+		respn.Status = "Error: FAQ tidak ditemukan"
+		at.WriteJSON(respw, http.StatusNotFound, respn)
+		return
+	}
+	
 	at.WriteJSON(respw, http.StatusOK, response)
 }
