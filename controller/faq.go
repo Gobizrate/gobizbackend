@@ -106,16 +106,13 @@ func UpdateFAQ(respw http.ResponseWriter, req *http.Request) {
 }
 
 func GetFAQByID(respw http.ResponseWriter, req *http.Request) {
-	payload, err := watoken.Decode(config.PublicKeyWhatsAuth, at.GetLoginFromHeader(req))
-	if err != nil {
+	faqID := req.URL.Query().Get("id")
+	if faqID == "" {
 		var respn model.Response
-		respn.Status = "Error: Token Tidak Valid"
-		respn.Info = at.GetSecretFromHeader(req)
-		respn.Location = "Decode Token Error"
-		respn.Response = err.Error()
-		at.WriteJSON(respw, http.StatusForbidden, respn)
+		respn.Status = "Error: ID FAQ tidak ditemukan"
+		at.WriteJSON(respw, http.StatusBadRequest, respn)
 		return
 	}
 
-	at.WriteJSON(respw, http.StatusOK, payload)
+	at.WriteJSON(respw, http.StatusOK, response)
 }
