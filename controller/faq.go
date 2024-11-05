@@ -33,7 +33,7 @@ func GetAllFAQ(respw http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	at.WriteJSON(respw, http.StatusOK, payload)
+	at.WriteJSON(respw, http.StatusOK, data)
 }
 
 func PostFAQ(respw http.ResponseWriter, req *http.Request) {
@@ -106,6 +106,14 @@ func UpdateFAQ(respw http.ResponseWriter, req *http.Request) {
 		respn.Location = "Decode Token Error"
 		respn.Response = err.Error()
 		at.WriteJSON(respw, http.StatusForbidden, respn)
+		return
+	}
+
+	faqID := r.URL.Query().Get("id")
+	if faqID == "" {
+		var respn model.Response
+		respn.Status = "Error: ID FAQ tidak ditemukan"
+		at.WriteJSON(respw, http.StatusBadRequest, respn)
 		return
 	}
 
