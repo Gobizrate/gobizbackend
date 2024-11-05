@@ -17,12 +17,10 @@ import (
 )
 
 func GetAllFAQ(respw http.ResponseWriter, req *http.Request) {
-	payload, err := watoken.Decode(config.PublicKeyWhatsAuth, at.GetLoginFromHeader(req))
+	data, err := atdb.GetAllDoc[[]model.FAQ](config.Mongoconn, "faq", bson.M{})
 	if err != nil {
 		var respn model.Response
-		respn.Status = "Error: Token Tidak Valid"
-		respn.Info = at.GetSecretFromHeader(req)
-		respn.Location = "Decode Token Error"
+		respn.Status = "Error: Data FAQ tidak ditemukan"
 		respn.Response = err.Error()
 		at.WriteJSON(respw, http.StatusForbidden, respn)
 		return
