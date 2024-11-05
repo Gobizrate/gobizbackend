@@ -26,6 +26,13 @@ func GetAllFAQ(respw http.ResponseWriter, req *http.Request) {
 		return
 	}
 
+	if len(data) == 0 {
+		var respn model.Response
+		respn.Status = "Error: Data FAQ tidak ditemukan"
+		at.WriteJSON(respw, http.StatusNotFound, respn)
+		return
+	}
+
 	at.WriteJSON(respw, http.StatusOK, payload)
 }
 
