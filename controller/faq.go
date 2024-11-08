@@ -109,13 +109,13 @@ func UpdateFAQ(respw http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	faqID := r.URL.Query().Get("id")
-	if faqID == "" {
-		var respn model.Response
-		respn.Status = "Error: ID FAQ tidak ditemukan"
-		at.WriteJSON(respw, http.StatusBadRequest, respn)
-		return
-	}
+	// faqID := r.URL.Query().Get("id")
+	// if faqID == "" {
+	// 	var respn model.Response
+	// 	respn.Status = "Error: ID FAQ tidak ditemukan"
+	// 	at.WriteJSON(respw, http.StatusBadRequest, respn)
+	// 	return
+	// }
 
 	at.WriteJSON(respw, http.StatusOK, payload)
 }
