@@ -58,9 +58,6 @@ func PostFAQ(respw http.ResponseWriter, req *http.Request) {
 	}
 
 	dataInsert := model.FAQ{
-		Nama:      faq.Nama,
-		Email:     faq.Email,
-		Handphone: faq.Handphone,
 		Questions: faq.Questions,
 	}
 
