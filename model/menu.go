@@ -49,6 +49,7 @@ type Rating struct {
 }
 
 type FAQ struct {
-	ID        primitive.ObjectID `bson:"_id,omitempty" json:"id,omitempty"`
-	Questions string             `bson:"questions" json:"questions,omitempty"`
+	ID        	primitive.ObjectID	`bson:"_id,omitempty" json:"id,omitempty"`
+	User       []Userdomyikado    	`bson:"user" json:"user"`
+	Questions 	string             	`bson:"questions" json:"questions,omitempty"`
 }
